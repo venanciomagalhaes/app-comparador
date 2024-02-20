@@ -115,7 +115,9 @@ export default {
 
 
           <div class="mb-3">
-            <label for="instituicoes" class="form-label">Selecione as instituições desejadas</label>
+            <label for="instituicoes" class="form-label" title="Use CTRL + click para selecionar mais de uma opção">Selecione as instituições desejadas
+              <i class="bi bi-info-circle"></i>
+            </label>
             <select
               v-model="instituicoes"
               ref="instituicoes"
@@ -132,7 +134,9 @@ export default {
 
 
           <div class="mb-3">
-            <label for="convenios" class="form-label">Selecione os convênios</label>
+            <label for="convenios" class="form-label" title="Use CTRL + click para selecionar mais de uma opção">Selecione os convênios
+              <i   class="bi bi-info-circle"></i>
+            </label>
             <select
               v-model="convenios"
               ref="convenios"
@@ -157,7 +161,7 @@ export default {
     <div class="modal-content">
       <span class="close" @click="closeModal()">&times;</span>
       <h2>Resultados da busca</h2>
-      <div v-if="propostas" class="propostas-container">
+      <div v-if="propostas != false" class="propostas-container">
         <div v-for="(proposta, name) in propostas" :key="name" class="proposta">
           <div class="proposta-header">Instituição: {{ name }}</div>
           <div class="mb-3">Valor solicitado: R$ {{ formatToMoney(valor_emprestimo) }}</div>
@@ -177,7 +181,7 @@ export default {
           </div>
         </div>
       </div>
-      <AlertWarning v-else-if="propostas.length === 0" :text-alert="'Nenhuma proposta encontrada'"/>
+      <AlertWarning v-else :text-alert="'Nenhuma proposta encontrada'"/>
       <button class="btn-fechar" @click="closeModal()">Fechar</button>
     </div>
   </div>
